@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New client</title>
+    <link rel="shortcut icon" href="/static/image/home.png">
+    <meta content="">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/libs/jquery/dist/jquery.min.js"></script>
+    <style></style>
+</head>
+<body>
+<center>
+{% block headline %}<h2>New client</h2>{% endblock %}
+{% block content %}
+<form class ="postform" enctype="multipart/form-data" method="post" action="javascript:void(null);" onsubmit="create()">
+{% csrf_token %}
+    <input type="text" name="name" size=60 placeholder="First name"/>
+    <input type="text" name="surname" size=60 placeholder="Surname"/>
+    <p>Birthday: <input type="date" name="calendar" placeholder="1999-06-01"
+    min="1000-01-01"/></p>
+    <p>Photo: <input type="file" name="photo" accept="image/*" /></p>
+    <p><button class="main-btn" title="Add new client into database" ><img src="/static/image/add_user.png" alt="New client" style="vertical-align:middle; width: 24px; height: 24px;">CREATE NEW PROFILE</button></p>
+</form>
+{% endblock %}
+</center>
+<script type="text/javascript" language="javascript">
+    function create() {
+        var file = $('input[name=photo]')[0].files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('first_name', $('input[name=name]')[0].value);
+        formData.append('surname', $('input[name=surname]')[0].value);
+        formData.append('birthday', $('input[name=calendar]')[0].value);        
+        $.ajax({
+            type: 'POST',
+            url: '/users/new_user/',
+            data: formData,
+            contentType : false,
+            processData: false,
+            beforeSend: function(xhr){ // Возврат значения false в функции beforeSend вызовет отмену ajax-запроса.
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    if (cookies[i].indexOf("csrftoken") >= 0) {
+                        var cookieValue = cookies[i].split('=')[1];
+                        break;
+                    }
+                }
+                xhr.setRequestHeader('X-CSRFToken', cookieValue);
+            },
+            success: function(data) {
+                window.location.href = '/';
+            },
+            error:  function(xhr, str){
+                alert('Возникла ошибка: ' + xhr.responseCode);
+            }
+        });
+    }
+</script>
+</body>
+</html>

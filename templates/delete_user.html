@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Delete user</title>
+    <link rel="shortcut icon" href="/static/image/home.png">
+    <meta content="">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <style></style>
+  </head>
+  <body>
+  	<center>
+		{% block headline %}<h2>Delete client</h2>{% endblock %}
+		{% block content %}
+			<h3>Thanks, client {{ deleted.first_name }} {{ deleted.surname }} is successfully deleted</h3>
+			<a href="/"><button><img src="/static/image/back.ico" alt="Home page" style="vertical-align:middle; width: 24px; height: 24px;"> BACK</button></a>
+		{% endblock %}
+	</center>
+  </body>
+</html>

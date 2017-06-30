@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients rating</title>
+    <link rel="shortcut icon" href="/static/image/home.png">
+    <meta content="">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/sorttable.js"></script>
+</head>
+<body>
+<center>
+{% block headline %}<h2>Vote for clients</h2>{% endblock %}
+{% block content %}
+    {% if clients %}
+        {% for client in clients %}
+            <h3><p>{{ client.first_name }} {{ client.surname }}</p><h3>
+            {% if client.photo and client.photo != 'No photo' %}
+                <img class="user-photo" src="{{ MEDIA_URL }}{{ client.photo }}" alt="Photo of {{ client.first_name }} {{ client.surname }}" >
+                <p>Rating: {{ client.rating }}</p>
+                {% if client.rating < 10 %}
+                <p><form class ="postform" method="POST" action="/vote/{{client.id}}/">
+                    {% csrf_token %}
+                    <button class="vote-btn" title="Vote for photo of {{ client.first_name }} {{ client.surname }}"><img src="/static/image/vote.png" alt="Vote" style="vertical-align:middle; width: 24px; height: 24px;"> +1</button>
+                </form></p>
+                {% else %}
+                    <button class="vote-btn" title="User already have max rating, so you can't vote" disabled><img src="/static/image/vote.png" alt="Vote" style="vertical-align:middle; width: 24px; height: 24px;"> +1</button>
+                {% endif %}
+            {% else %}
+                <img class="user-photo" src="{{ MEDIA_URL }}photos/anonym.jpg" alt="Photo of {{ client.first_name }} {{ client.surname }}" >
+                <p>Rating: {{ client.rating }}</p>
+                <button class="vote-btn" title="User haven't photo, so you can't vote" disabled><img src="/static/image/vote.png" alt="Vote" style="vertical-align:middle; width: 24px; height: 24px;"> +1</button>
+            {% endif %}
+            <br><hr>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+</center>
+</center>
+</body>
+</html>

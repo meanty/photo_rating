@@ -1,0 +1,43 @@
+# Python interpreter
+*.py[cod]
+/__pycache__/
+/venv/
+
+file_in
+
+/*/migrations/*
+!/*/migrations/__init__.py
+!/app_gisdata/migrations/*.py
+
+# System scripts
+*.bat
+
+# Gulp build
+node_modules/
+/node_modules/
+/**/node_modules/*
+/**/gulpfile.tmp.*.js
+/**/.fuse_hidden*
+
+static/libs/*
+
+
+# Virtual environments
+.vagrant/
+
+
+# IDEs and editors
+
+#gunicorn
+restart_gunicorn.sh
+start_gunicorn.sh
+stop_gunicorn.sh
+status_gunicorn.sh
+gunicorn.log
+gunicorn.pid
+
+# Windows
+Thumbs.db
+
+# KDE
+.directory

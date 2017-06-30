@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients rating</title>
+    <link rel="shortcut icon" href="/static/image/home.png">
+    <meta content="">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/sorttable.js"></script>
+    <style></style>
+</head>
+<body>
+<center>
+{% block headline %}<h2>{{ first_name }} {{ surname }}</h2>{% endblock %}
+{% block content %}
+	{% if birthday %}
+		<p>Age: {{ age }} years</p>
+		<p>Birth date: {{ birthday }}</p>
+	{% else %}
+		<p>Age: {{ age }}</p>
+		<p>Birth date: Indeterminate</p>
+	{% endif %}
+	{% if photo %}
+		<img class="user-photo" src="{{ photo }}" alt="Photo of {{ first_name }} {{ surname }}" >
+	{% else %}
+		<p>No photo</p>
+	{% endif %}
+{% endblock %}
+</center>
+</body>
+</html>

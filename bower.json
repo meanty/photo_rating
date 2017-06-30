@@ -1,0 +1,21 @@
+{
+  "name": "photorating",
+  "authors": [
+    "Marina"
+  ],
+  "description": "Rate the clients from 0 to 10! Click +1 for their photo if they are pretty nice for you.",
+  "main": "templates/index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "jquery": "^3.2.1"
+  }
+}

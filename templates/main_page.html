@@ -1,0 +1,61 @@
+{% block headline %}<h2>Clients list</h2>{% endblock %}
+{% block content %}
+    <form class ="postform" method="POST" action="/search/">
+        {% csrf_token %}
+        <input type="text" name="search" class="search-box"placeholder="Search by name or surname..">
+        <input type="submit" tabindex="-1"
+           style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+            />
+    </form>
+    <table border=none class="sortable">
+        <thead><tr>
+            <td class="td-name">Name</td>
+            <td class="td-surname">Surname</td>
+            <td class="td-age">Age</td>
+            <td class="td-birth">Birth date</td>
+            <td class="td-photo">Photo</td>
+            <td class="td-plus-button">Open profile</td>
+            <td class="td-del-button">Del profile</td>
+        </tr></thead>
+        <tbody>
+        {% if clients %}
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.first_name }}</td>
+                    <td>{{ client.surname }}</td>
+                    {% if client.birthday %}
+                        <td>{{ client.calc_age }}</td>
+                        <td>{{ client.birthday }}</td>
+                    {% else %}
+                        <td>Please set birth date</td>
+                        <td>Indeterminate</td>
+                    {% endif %}
+                    {% if client.photo %}
+                        <td>{{ client.photo }}</td>
+                    {% else %}
+                        <td>No photo</td>
+                    {% endif %}
+                    <td><form method="GET" action="{% url 'user-card' client.pk %}"><button class="open-profile-btn" title="Open profile of {{ client.first_name }} {{ client.surname }}">+</button></form></td>
+                    <td><form method="POST" action="{% url 'user-card' client.pk %}">{% csrf_token %}<button class="delete-profile-btn" title="Delete profile of {{ client.first_name }} {{ client.surname }}"><img src="/static/image/delete.png" alt="Del client" style="vertical-align:middle; width: 24px; height: 24px;"></button></form></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="7" style="text-align: center;">
+                List is empty
+            </td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <form class ="postform" method="POST" action="/users/create/">
+        {% csrf_token %}
+        <button class="main-btn" title="Add new client into database"><img src="/static/image/add_user.png" alt="New client" style="vertical-align:middle; width: 24px; height: 24px;">ADD CLIENT</button>
+    </form>
+    <form class ="postform" method="POST" action="/xlsx/">
+        {% csrf_token %}
+        <button class="main-btn" title="Download excel file contains short info about clients"><img src="/static/image/xls.png" alt="Export cards" style="vertical-align:middle; width: 24px; height: 24px;">EXPORT CARDS</button>
+    </form>
+    <form class ="postform" method="POST" action="{% url 'vote_page' %}">
+        {% csrf_token %}
+        <button class="main-btn" title="Rate clients by photo"><img src="/static/image/vote.png" alt="Vote for client" style="vertical-align:middle; width: 24px; height: 24px;"> VOTE PAGE</button>
+    </form>
+{% endblock %}

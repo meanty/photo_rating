@@ -1,0 +1,72 @@
+html {
+    background-color: #9d998f;
+    background: linear-gradient(to top, #9d998f, #ffffff);
+}
+
+.postform {
+    margin: 15px;
+    display: inline-block;
+}
+
+/* Sortable tables */
+table.sortable {
+    background-color:#eee;
+}
+table.sortable thead {
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+
+table.sortable>tbody>tr>td>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.td-plus-button {
+    width: 56px;
+}
+.td-del-button {
+    width: 56px;
+}
+.open-profile-btn {
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    font-size: 16pt;
+    cursor: default;
+}
+.delete-profile-btn {
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+.search-box {
+    width: 180px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    /*margin-bottom: 20px;*/
+}
+
+.search-box:focus {
+    width: 100%;
+}
+
+.user-photo {
+    width: auto;
+    height: 400px;
+}
+
+.main-btn {
+    border-radius: 2px;
+}
+
+.vote-btn {
+    width: 64px;
+    height: 32px;
+    border-radius: 16px;
+    box-shadow:
+        inset 0 -3px 10px rgba(255,255,255,1), /* тень внутри div */
+        inset 0 3px 10px rgba(0,0,0,.4),
+        0 2px 4px rgba(0,0,0,.9) !important; /* тень снаружи div */
+}
