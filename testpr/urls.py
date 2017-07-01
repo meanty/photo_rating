@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.conf import settings
+# from django.conf import settings
 from django.conf.urls import include, url, static
-# from django.conf.urls.static import static
 from django.contrib import admin
-# from django.views.static import serve
-from app_userlist.views import UserCard
 from . import views
 import settings
 

@@ -2,19 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, transaction
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
-# from django.contrib.auth.models import User
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
 from datetime import date
 
-# class ProfileManager(models.Manager):
-#     pass
 
 class Profile (models.Model):
-    # objects = ProfileManager()
     first_name = models.CharField(max_length=100, default='Name')
     surname = models.CharField(max_length=100, default='Surname')
     birthday = models.DateField(null=True, blank=True)
@@ -39,8 +33,6 @@ class Profile (models.Model):
         else:
             return 'Please set birth date'
 
-    # @classmethod
-    # def create(cls, *args, **kwargs):
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.surname)
@@ -51,7 +43,6 @@ class Profile (models.Model):
 
 @receiver(pre_save, sender=Profile)
 def add_vote(instance, **kwargs):
-    print '=====', instance
     try:
         pre_instance = Profile.objects.get(pk=instance.pk)
         if pre_instance.rating > 9:
